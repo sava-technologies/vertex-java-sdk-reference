@@ -68,8 +68,8 @@ tmp/director_proof_of_address.txt
 ### Business Entity Onboarding (KYB)
 
 ```bash
-# Step B1: Create a business entity (requires real CIPC registration number)
-./gradlew run -PmainClass=CreateBusinessEntityApp
+# Step B1: Create a business entity (pass your 12-digit CIPC registration number)
+./gradlew run -PmainClass=CreateBusinessEntityApp --args="201961744607"
 
 # Step B2: Fetch directors from Transunion, upload business + director docs
 ./gradlew run -PmainClass=UploadKybApp

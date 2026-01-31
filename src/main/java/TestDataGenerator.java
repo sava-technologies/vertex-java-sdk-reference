@@ -181,15 +181,15 @@ public class TestDataGenerator {
 
     /**
      * Generates realistic South African business entity data.
-     * Registration number is a random 12-digit CIPC-style number.
+     * @param registrationNumber a valid 12-digit CIPC registration number
      */
-    public BusinessData generateBusiness() {
+    public BusinessData generateBusiness(String registrationNumber) {
         String prefix = pick(BIZ_PREFIXES);
         String suffix = pick(BIZ_SUFFIXES);
         String companyName = prefix + " " + suffix + " (Pty) Ltd";
         String tradingName = prefix + " " + suffix;
 
-        String regNum = "201961744607";
+        String regNum = registrationNumber;
 
         String email = "sdk-biz-" + System.currentTimeMillis() + "-"
                      + rng.nextInt(1000) + "@test.nexus.example";

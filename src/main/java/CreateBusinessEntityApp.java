@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Step B1: Create a business entity.
  *
- * Usage:  ./gradlew run -PmainClass=CreateBusinessEntityApp
+ * Usage:  ./gradlew run -PmainClass=CreateBusinessEntityApp --args="<registration_number>"
  * Next:   ./gradlew run -PmainClass=UploadKybApp
  */
 public class CreateBusinessEntityApp {
@@ -15,8 +15,22 @@ public class CreateBusinessEntityApp {
         System.out.println("══════════════════════════════════════════");
         System.out.println();
 
+        if (args.length < 1 || args[0].isBlank()) {
+            System.err.println("  ✗ Registration number required.");
+            System.err.println();
+            System.err.println("  Usage: ./gradlew run -PmainClass=CreateBusinessEntityApp --args=\"<12-digit CIPC registration number>\"");
+            System.err.println("  Example: ./gradlew run -PmainClass=CreateBusinessEntityApp --args=\"201961744607\"");
+            return;
+        }
+
+        String regNumber = args[0].trim();
+        if (regNumber.length() != 12) {
+            System.err.println("  ✗ Registration number must be exactly 12 digits. Got: " + regNumber);
+            return;
+        }
+
         TestDataGenerator gen = new TestDataGenerator();
-        TestDataGenerator.BusinessData biz = gen.generateBusiness();
+        TestDataGenerator.BusinessData biz = gen.generateBusiness(regNumber);
 
         System.out.println("  Generated test business:");
         System.out.println("    Company:      " + biz.companyName());
